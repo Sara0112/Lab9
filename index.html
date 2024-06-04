@@ -69,21 +69,21 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button id="consolelog">Console Log</button>
+      <button id="consoleerror">Console Error</button>
+      <button id="consolecount">Console Count</button>
+      <button id="consolewarn">Console Warn</button>
+      <button id="consoleassert">Console Assert</button>
+      <button id="consoleclear">Console Clear</button>
+      <button id="consoledir">Console Dir</button>
+      <button id="consoledirxml">Console dirxml</button>
+      <button id="consolestart">Console Group Start</button>
+      <button id="consoleend">Console Group End</button>
+      <button id="consoletable">Console Table</button>
+      <button id="starttimer">Start Timer</button>
+      <button id="endtimer">End Timer</button>
+      <button id="consoletrace">Console Trace</button>
+      <button id="triggerglobalerror">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -93,8 +93,8 @@
       e.preventDefault();
       let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
+      let secondNum = document.querySelector('#second-num').value;
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
 
@@ -102,6 +102,71 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('form');
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const output = document.querySelector('output');
+        const firstNum = document.getElementById('first-num').value;
+        const secondNum = document.getElementById('second-num').value;
+        const operator = document.getElementById('operator').value;
+        try {
+            const result = eval(`${firstNum} ${operator} ${secondNum}`);
+            output.textContent = result;
+        } catch (error) {
+            output.textContent = 'Error: ' + error.message;
+        }
+    });
+    document.getElementById('consolelog').addEventListener('click', () => {
+        console.log("console.log msg!");
+    });
+    document.getElementById('consoleerror').addEventListener('click', () => {
+        console.error("console.error msg!");
+    });
+    document.getElementById('consolecount').addEventListener('click', () => {
+        console.count("ExampleConsoleCount");
+    });
+    document.getElementById('consoleassert').addEventListener('click', () => {
+        console.assert(10 === 20, "assertion failed: 10 != 20");
+        console.assert(10 === 10, "assertion did not fail");
+    });
+    document.getElementById('consolewarn').addEventListener('click', () => {
+        console.warn("Warning!");
+    });
+    document.getElementById('consoleclear').addEventListener('click', () => {
+        console.clear();
+    });
+    document.getElementById('consoledir').addEventListener('click', () => {
+        console.dir(document.head);
+    });
+    document.getElementById('consoledirxml').addEventListener('click', () => {
+        console.dirxml(document);
+    });
+    document.getElementById('consolestart').addEventListener('click', () => {
+        console.group("Example Group");
+    });
+    document.getElementById('consoleend').addEventListener('click', () => {
+        console.groupEnd();
+    });
+    document.getElementById('consoletable').addEventListener('click', () => {
+        console.table([{name: "May", age: 7}, {name: "Boss", age: 9}, {name: "Kebi", age: 7}]);
+    });
+    document.getElementById('starttimer').addEventListener('click', () => {
+        console.time("ExampleStartTimer");
+    });
+    document.getElementById('endtimer').addEventListener('click', () => {
+        console.timeEnd("ExampleEndTimer");
+    });
+    document.getElementById('consoletrace').addEventListener('click', () => {
+        console.trace("TraceExample");
+    });
+    document.getElementById('triggerglobalerror').addEventListener('click', () => {
+        undefinedFunctionCall();
+    });
+    window.onerror = function(message, source, lineno, colno, error) {
+        console.log("Error occurred:", message);
+    };
+  });
   </script>
 </body>
 
