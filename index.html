@@ -143,7 +143,7 @@
         console.dirxml(document);
     });
     document.getElementById('consolestart').addEventListener('click', () => {
-        console.group("Example Group");
+        console.group();
     });
     document.getElementById('consoleend').addEventListener('click', () => {
         console.groupEnd();
@@ -152,13 +152,13 @@
         console.table([{name: "May", age: 7}, {name: "Boss", age: 9}, {name: "Kebi", age: 7}]);
     });
     document.getElementById('starttimer').addEventListener('click', () => {
-        console.time("ExampleStartTimer");
+        console.time();
     });
     document.getElementById('endtimer').addEventListener('click', () => {
-        console.timeEnd("ExampleEndTimer");
+        console.timeEnd();
     });
     document.getElementById('consoletrace').addEventListener('click', () => {
-        console.trace("TraceExample");
+        console.trace();
     });
     document.getElementById('triggerglobalerror').addEventListener('click', () => {
         undefinedFunctionCall();
